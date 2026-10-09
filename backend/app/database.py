@@ -4,8 +4,11 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 from .config import DATABASE_URL
 
 url = DATABASE_URL
-if url.startswith("postgres://"):  # some hosts still hand out the legacy scheme
-    url = url.replace("postgres://", "postgresql://", 1)
+# Normalise every common Postgres spelling to the driver we install (psycopg2)
+for prefix in ("postgres://", "postgresql+psycopg://", "postgresql+psycopg2://"):
+    if url.startswith(prefix):
+        url = "postgresql://" + url[len(prefix):]
+        break
 
 kwargs = {"connect_args": {"check_same_thread": False}} if url.startswith("sqlite") else {"pool_pre_ping": True}
 engine = create_engine(url, **kwargs)
