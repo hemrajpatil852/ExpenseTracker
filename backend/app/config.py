@@ -8,7 +8,7 @@ CORS_ORIGINS = [
     o.strip().rstrip("/")
     for o in os.getenv(
         "CORS_ORIGINS",
-        "http://localhost:5173,https://expense-tracker-lmizahagx-hemrajpatil5257-3107s-projects.vercel.app"
+        "http://localhost:5173,https://expense-tracker-xi-sand.vercel.app"
     ).split(",")
     if o.strip()
 ]

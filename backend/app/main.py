@@ -29,7 +29,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://expense-tracker-lmizahagx-hemrajpatil5257-3107s-projects.vercel.app"
+        "https://expense-tracker-xi-sand.vercel.app"
     ],
     allow_credentials=False,
     allow_methods=["*"],
