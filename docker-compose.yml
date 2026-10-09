@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment: { POSTGRES_USER: finance, POSTGRES_PASSWORD: finance, POSTGRES_DB: finance }
+    volumes: [pgdata:/var/lib/postgresql/data]
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql://finance:finance@db:5432/finance
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-real-deployments-0123456789}
+      CORS_ORIGINS: http://localhost:5173
+    depends_on: [db]
+    ports: ["8000:8000"]
+volumes:
+  pgdata:
