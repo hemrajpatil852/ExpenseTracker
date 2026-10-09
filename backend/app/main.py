@@ -18,10 +18,19 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Expense Classifier API", version="1.0.0", lifespan=lifespan, docs_url="/api/docs", openapi_url="/api/openapi.json")
+app = FastAPI(
+    title="Expense Classifier API",
+    version="1.0.0",
+    lifespan=lifespan,
+    docs_url="/api/docs",
+    openapi_url="/api/openapi.json",
+)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://expense-tracker-lmizahagx-hemrajpatil5257-3107s-projects.vercel.app"
+    ],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
