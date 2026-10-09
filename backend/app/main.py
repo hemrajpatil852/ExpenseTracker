@@ -19,8 +19,13 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Expense Classifier API", version="1.0.0", lifespan=lifespan, docs_url="/api/docs", openapi_url="/api/openapi.json")
-app.add_middleware(CORSMiddleware, allow_origins=config.CORS_ORIGINS, allow_methods=["POST", "OPTIONS"],
-                   allow_headers=["Authorization", "Content-Type"], expose_headers=["Content-Disposition"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=config.CORS_ORIGINS,
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
+    expose_headers=["Content-Disposition"],
+)
 
 
 @app.middleware("http")
